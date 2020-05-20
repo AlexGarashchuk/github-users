@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Profile({login}) {
+export default function Profile({ login }) {
   const classes = useStyles();
 
   const [userData, setUserData] = useState([]);
@@ -61,7 +61,9 @@ export default function Profile({login}) {
                   {userData.name}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  {userData.company !== null || undefined ? userData.company + "," : ""}
+                  {userData.company !== null || undefined
+                    ? userData.company + ","
+                    : ""}
                   {userData.location}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">

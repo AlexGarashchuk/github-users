@@ -39,7 +39,7 @@ export default function Item({ data }) {
               </ListItemAvatar>
               <ListItemText primary={user.login} />
             </Link>
-            <a href={user.html_url} target="_blank">
+            <a href={user.html_url} target="_blank" rel="noopener noreferrer">
               <Button variant="outlined" color="primary">
                 Button
               </Button>
