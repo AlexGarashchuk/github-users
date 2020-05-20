@@ -2,6 +2,6 @@
 
 npm install
 
-## . Run the application
+## Run the application
 
 npm start
