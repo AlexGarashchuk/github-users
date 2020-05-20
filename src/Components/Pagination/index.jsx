@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   nav: {
     display: "flex",
     color: "#000",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   item: {
     padding: "5px 10px",
@@ -18,24 +18,36 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: "border-box",
   },
   activeItem: {
+    padding: "5px 10px",
+    margin: "0 5px",
+    boxSizing: "border-box",
     borderRadius: "100%",
     border: "1px solid #000",
-  }
+  },
 }));
 
-export default function Pagination({ userPerPage, totalUsers, paginate, currentPage }) {
-  debugger;
+export default function Pagination({
+  userPerPage,
+  totalUsers,
+  paginate,
+  currentPage,
+}) {
   const classes = useStyles();
   let pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalUsers / userPerPage); i++) {
- 
     pageNumbers.push(i);
   }
+
   return (
     <div className={classes.root}>
       <nav className={classes.nav}>
         {pageNumbers.map((number) => (
-          <li key={number} className={classes.item}>
+          <li
+            key={number}
+            className={
+              currentPage === number ? classes.activeItem : classes.item
+            }
+          >
             <a onClick={() => paginate(number)} href="#">
               {number}
             </a>

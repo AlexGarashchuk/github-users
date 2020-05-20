@@ -1,9 +1,11 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    margin: 'auto',
+    margin: "auto",
     maxWidth: 500,
   },
   image: {
@@ -19,42 +21,55 @@ const useStyles = makeStyles((theme) => ({
     height: 128,
   },
   img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+    margin: "auto",
+    display: "block",
+    maxWidth: "100%",
+    maxHeight: "100%",
   },
 }));
 
-export default function Profile({userData}) {
+export default function Profile({login}) {
   const classes = useStyles();
+
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(`https://api.github.com/users/${login}`);
+      setUserData(result.data);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className={classes.root}>
+      <Link to="/">Go to back</Link>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src={userData} />
+              <img
+                className={classes.img}
+                alt="complex"
+                src={userData.avatar_url}
+              />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                  Standard license
+                  {userData.name}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  Full resolution 1920x1080 • JPEG
+                  {userData.company !== null || undefined ? userData.company + "," : ""}
+                  {userData.location}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  ID: 1030114
+                  From: {userData.created_at}
                 </Typography>
               </Grid>
-              <Grid item>
-              </Grid>
+              <Grid item></Grid>
             </Grid>
-            
           </Grid>
         </Grid>
       </Paper>

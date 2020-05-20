@@ -1,9 +1,7 @@
 import React from "react";
 import "./App.css";
 import UsersList from "./Components/List";
-import BasicPagination from "./Components/Pagination";
 import Profile from "./Components/UserProfile";
-import { Switch } from "@material-ui/core";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
@@ -14,16 +12,18 @@ function App() {
     <div>
       <div>
         <Router>
-          {/* {dataFromLocalFile.map((data) => ( */}
+         
             <div>
               <Route exact path="/">
                 <UsersList data={dataFromLocalFile} />
               </Route>
-              {/* <Route path={`/${data.login}`}> */}
-                {/* <Profile userData={data.avatar_url}/> */}
-              {/* </Route> */}
+               {dataFromLocalFile.map((data) => (
+              <Route path={`/${data.login}`} key={data.id}>
+                <Profile login={data.login}/>
+              </Route>
+              ))}
             </div>
-          {/* ))} */}
+          
         </Router>
       </div>
     </div>
