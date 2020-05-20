@@ -59,7 +59,7 @@ export default function Pagination({
               currentPage === number ? classes.activeItem : classes.item
             }
           >
-            <p onClick={() => paginate(number)}>{number}</p>
+            <a onClick={() => paginate(number)}>{number}</a>
           </li>
         ))}
       </nav>
