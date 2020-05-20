@@ -16,7 +16,7 @@ function App() {
   }, []);
   return (
     <Router>
-      <Route exact path="/">
+      <Route exact path="/github-users">
         <UsersList data={users} />
       </Route>
       {users.map((data) => (

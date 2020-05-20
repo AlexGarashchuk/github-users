@@ -42,7 +42,7 @@ export default function Profile({ login }) {
 
   return (
     <div className={classes.root}>
-      <Link to="/">Go to back</Link>
+      <Link to="/github-users">Go to back</Link>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
