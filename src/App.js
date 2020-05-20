@@ -4,7 +4,6 @@ import UsersList from "./Components/List";
 import Profile from "./Components/UserProfile";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
-import { Grid } from "@material-ui/core";
 
 function App() {
   const [users, setData] = useState([]);
